@@ -28,6 +28,11 @@ public class CXXStartSessionScenario extends Scenario {
 
         if (metadata == null || !metadata.equals("non-crashy")) {
             Bugsnag.getClient().startSession();
+            try {
+                Thread.sleep(10); // simulate async request
+            } catch (InterruptedException ignored) {
+                ignored.printStackTrace();
+            }
             crash(0);
         }
     }
